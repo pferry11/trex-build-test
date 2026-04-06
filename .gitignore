@@ -1,4 +1,13 @@
+# Ignore virtual environment
 venv/
+
+# Ignore Robot Framework output files
+output.xml
+log.html
+report.html
+*.png
+*.jpg
+
+# Python cache
 __pycache__/
-*.log
-*.html
+*.pyc

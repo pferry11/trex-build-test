@@ -3,4 +3,4 @@ Library    OperatingSystem
 
 *** Test Cases ***
 Verify Environment
-    Log    TRex Build Test project is running!
+    Log    TRex Build Test project is running!!!
