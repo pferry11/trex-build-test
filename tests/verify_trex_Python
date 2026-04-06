@@ -1,0 +1,15 @@
+*** Settings ***
+Library    SSHLibrary
+
+*** Variables ***
+${TREX_HOST}      10.0.0.26
+${TREX_USER}      paul
+${TREX_PASS}      Jake420g2301
+
+*** Test Cases ***
+Verify Python Version On TRex
+    Open Connection    ${TREX_HOST}
+    Login              ${TREX_USER}    ${TREX_PASS}
+    ${out}=    Execute Command    python3 --version
+    Should Contain    ${out}    Python 3.6.9
+    Close All Connections

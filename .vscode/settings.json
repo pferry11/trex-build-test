@@ -1,0 +1,4 @@
+{
+    "python.defaultInterpreterPath": "/home/paul/projects/trex-build-test/venv/bin/python",
+    "python.terminal.activateEnvironment": true
+}
