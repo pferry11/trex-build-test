@@ -2,9 +2,9 @@
 Library    SSHLibrary
 
 *** Variables ***
-${TREX_HOST}      10.0.0.26
-${TREX_USER}      paul
-${TREX_PASS}      Jake420g2301
+${TREX_HOST}      
+${TREX_USER}      
+${TREX_PASS}      
 
 *** Test Cases ***
 Verify Python Version On TRex
