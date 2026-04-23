@@ -1,0 +1,4 @@
+HOST: 10.0.0.26
+NAME: trex02
+trex_dir: /opt/trex
+trex_cfg: /etc/trex_cfg.yaml

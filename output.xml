@@ -1,25 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4.2 (Python 3.12.3 on linux)" generated="2026-04-06T16:41:30.512150" rpa="false" schemaversion="5">
-<suite id="s1" name="Verify Trex Env" source="/home/paul/projects/trex-build-test/tests/verify_trex_env.robot">
-<kw name="Open Connection And Login" type="SETUP">
+<robot generator="Robot 7.4.2 (Python 3.12.3 on linux)" generated="2026-04-23T20:03:01.776933" rpa="false" schemaversion="5">
+<suite id="s1" name="Host Config" source="/home/paul/projects/Trex/tests/host_config.robot">
+<kw name="Setup SSH Session" type="SETUP">
+<kw name="Load Credentials" owner="ssh">
+<kw name="Get Environment Variable" owner="OperatingSystem">
+<msg time="2026-04-23T20:03:01.855583" level="INFO">${user} = paul</msg>
+<var>${user}</var>
+<arg>TREX_USER</arg>
+<doc>Returns the value of an environment variable with the given name.</doc>
+<status status="PASS" start="2026-04-23T20:03:01.855464" elapsed="0.000143"/>
+</kw>
+<kw name="Get Environment Variable" owner="OperatingSystem">
+<msg time="2026-04-23T20:03:01.855763" level="INFO">${pass} = Jake420g2301</msg>
+<var>${pass}</var>
+<arg>TREX_PASS</arg>
+<doc>Returns the value of an environment variable with the given name.</doc>
+<status status="PASS" start="2026-04-23T20:03:01.855679" elapsed="0.000099"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-04-23T20:03:01.856137" level="INFO">Length is 4.</msg>
+<arg>${user}</arg>
+<arg>TREX_USER is not set. Did you source trex.env?</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-04-23T20:03:01.855852" elapsed="0.000312"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-04-23T20:03:01.856385" level="INFO">Length is 12.</msg>
+<arg>${pass}</arg>
+<arg>TREX_PASS is not set. Did you source trex.env?</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-04-23T20:03:01.856223" elapsed="0.000187"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-04-23T20:03:01.856976" level="INFO">${SSH_USER} = paul</msg>
+<arg>${SSH_USER}</arg>
+<arg>${user}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-04-23T20:03:01.856478" elapsed="0.000524"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2026-04-23T20:03:01.857511" level="INFO">${SSH_PASS} = Jake420g2301</msg>
+<arg>${SSH_PASS}</arg>
+<arg>${pass}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2026-04-23T20:03:01.857067" elapsed="0.000468"/>
+</kw>
+<doc>Ensures TREX_USER and TREX_PASS are available.</doc>
+<status status="PASS" start="2026-04-23T20:03:01.855157" elapsed="0.002414"/>
+</kw>
+<kw name="Open SSH Connection" owner="ssh">
 <kw name="Open Connection" owner="SSHLibrary">
-<arg>${TREX_HOST}</arg>
+<arg>${host}</arg>
+<arg>timeout=${SSH_TIMEOUT}</arg>
 <doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
-<status status="PASS" start="2026-04-06T16:41:30.579078" elapsed="0.000148"/>
+<status status="PASS" start="2026-04-23T20:03:01.857775" elapsed="0.000185"/>
 </kw>
 <kw name="Login" owner="SSHLibrary">
-<msg time="2026-04-06T16:41:30.579450" level="INFO">Logging into '10.0.0.26:22' as 'paul'.</msg>
-<msg time="2026-04-06T16:41:32.245057" level="INFO">Read output: Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.15.0-213-generic x86_64)
+<msg time="2026-04-23T20:03:01.858144" level="INFO">Logging into '10.0.0.26:22' as 'paul'.</msg>
+<msg time="2026-04-23T20:03:03.439376" level="INFO">Read output: Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.15.0-213-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
  * Management:     https://landscape.canonical.com
  * Support:        https://ubuntu.com/pro
 
-  System information as of Mon Apr  6 16:41:30 BST 2026
+  System information as of Thu Apr 23 20:03:01 BST 2026
 
-  System load:  0.0                Processes:             183
-  Usage of /:   42.3% of 15.64GB   Users logged in:       0
-  Memory usage: 54%                IP address for ens224: 10.0.0.26
+  System load:  0.0                Processes:             186
+  Usage of /:   42.4% of 15.64GB   Users logged in:       1
+  Memory usage: 53%                IP address for ens224: 10.0.0.26
   Swap usage:   0%
 
  * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
@@ -39,134 +87,93 @@ New release '20.04.6 LTS' available.
 Run 'do-release-upgrade' to upgrade to it.
 
 
-Last login: Mon Apr  6 16:39:47 2026 from 10.0.0.152
+Last login: Thu Apr 23 20:02:44 2026 from 10.0.0.152
 paul@TRex01:~$</msg>
-<arg>${TREX_USER}</arg>
-<arg>${TREX_PASS}</arg>
-<arg>loglevel=NONE</arg>
+<arg>${SSH_USER}</arg>
+<arg>${SSH_PASS}</arg>
 <doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
-<status status="PASS" start="2026-04-06T16:41:30.579302" elapsed="1.665874"/>
+<status status="PASS" start="2026-04-23T20:03:01.858023" elapsed="1.581455"/>
 </kw>
-<status status="PASS" start="2026-04-06T16:41:30.578740" elapsed="1.666528"/>
+<arg>${host}</arg>
+<doc>Opens SSH connection using credentials loaded earlier.</doc>
+<status status="PASS" start="2026-04-23T20:03:01.857648" elapsed="1.581911"/>
 </kw>
-<test id="s1-t1" name="Verify Python Version" line="19">
-<kw name="Verify Python Version Is Correct">
+<status status="PASS" start="2026-04-23T20:03:01.854837" elapsed="1.584764"/>
+</kw>
+<test id="s1-t1" name="Hugepages Should Be Configured Correctly" line="10">
+<kw name="Verify Hugepages" owner="common">
+<kw name="Run Command" owner="ssh">
 <kw name="Execute Command" owner="SSHLibrary">
-<msg time="2026-04-06T16:41:32.246120" level="INFO">Executing command 'python3 --version'.</msg>
-<msg time="2026-04-06T16:41:32.258435" level="INFO">Command exited with return code 0.</msg>
-<msg time="2026-04-06T16:41:32.258525" level="INFO">${out} = Python 3.6.9</msg>
-<var>${out}</var>
-<arg>python3 --version</arg>
+<msg time="2026-04-23T20:03:03.440474" level="INFO">Executing command 'sysctl vm.nr_hugepages'.</msg>
+<msg time="2026-04-23T20:03:03.452578" level="INFO">Command exited with return code 0.</msg>
+<msg time="2026-04-23T20:03:03.452656" level="INFO">${output} = vm.nr_hugepages = 2048</msg>
+<var>${output}</var>
+<arg>${cmd}</arg>
 <doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
-<status status="PASS" start="2026-04-06T16:41:32.246037" elapsed="0.012507"/>
+<status status="PASS" start="2026-04-23T20:03:03.440408" elapsed="0.012267"/>
 </kw>
-<kw name="Should Contain" owner="BuiltIn">
-<arg>${out}</arg>
-<arg>Python 3.6.9</arg>
-<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" start="2026-04-06T16:41:32.258643" elapsed="0.000430"/>
+<return>
+<value>${output}</value>
+<status status="PASS" start="2026-04-23T20:03:03.452723" elapsed="0.000042"/>
+</return>
+<msg time="2026-04-23T20:03:03.452880" level="INFO">${output} = vm.nr_hugepages = 2048</msg>
+<var>${output}</var>
+<arg>sysctl vm.nr_hugepages</arg>
+<doc>Runs a command and returns stdout.</doc>
+<status status="PASS" start="2026-04-23T20:03:03.440269" elapsed="0.012629"/>
 </kw>
-<status status="PASS" start="2026-04-06T16:41:32.245795" elapsed="0.013330"/>
+<kw name="Strip String" owner="String">
+<msg time="2026-04-23T20:03:03.453145" level="INFO">${clean} = vm.nr_hugepages = 2048</msg>
+<var>${clean}</var>
+<arg>${output}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<status status="PASS" start="2026-04-23T20:03:03.452978" elapsed="0.000186"/>
 </kw>
-<doc>Verifies Python version on remote TRex server is Python 3.6.9.</doc>
-<status status="PASS" start="2026-04-06T16:41:32.245335" elapsed="0.013903"/>
-</test>
-<test id="s1-t2" name="Verify TRex Directory" line="23">
-<kw name="Verify TRex Directory Exists">
-<kw name="Execute Command" owner="SSHLibrary">
-<msg time="2026-04-06T16:41:32.259790" level="INFO">Executing command 'test -d /opt/trex-3.06 &amp;&amp; echo OK'.</msg>
-<msg time="2026-04-06T16:41:32.304852" level="INFO">Command exited with return code 0.</msg>
-<msg time="2026-04-06T16:41:32.304989" level="INFO">${out} = OK</msg>
-<var>${out}</var>
-<arg>test -d ${TREX_DIR} &amp;&amp; echo OK</arg>
-<doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
-<status status="PASS" start="2026-04-06T16:41:32.259717" elapsed="0.045292"/>
+<kw name="Split String" owner="String">
+<msg time="2026-04-23T20:03:03.453414" level="INFO">@{parts} = [ vm.nr_hugepages | = | 2048 ]</msg>
+<var>@{parts}</var>
+<arg>${clean}</arg>
+<arg>${SPACE}</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="PASS" start="2026-04-23T20:03:03.453240" elapsed="0.000191"/>
 </kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${out}</arg>
-<arg>OK</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2026-04-06T16:41:32.305121" elapsed="0.000269"/>
-</kw>
-<status status="PASS" start="2026-04-06T16:41:32.259581" elapsed="0.045845"/>
-</kw>
-<doc>Verifies TRex directory exists on remote TRex server.</doc>
-<status status="PASS" start="2026-04-06T16:41:32.259367" elapsed="0.046143"/>
-</test>
-<test id="s1-t3" name="Verify TRex Config File" line="27">
-<kw name="Verify TRex Config File Matches Expected">
-<kw name="Execute Command" owner="SSHLibrary">
-<msg time="2026-04-06T16:41:32.306184" level="INFO">Executing command 'cat /opt/trex-3.06/trex_cfg.yaml'.</msg>
-<msg time="2026-04-06T16:41:32.352911" level="INFO">Command exited with return code 0.</msg>
-<msg time="2026-04-06T16:41:32.353021" level="INFO">${actual_text} = ### TRex Dual-Port Configuration
-### Using PCI Passthrough Intel 82599ES 10Gb NICs
-
-- port_limit: 2
-  version: 2
-  interfaces:
-    - "0000.03:00.0"    # Port 0
-    - "0000.03:00.1"    # Port 1
-
-  port...</msg>
-<var>${actual_text}</var>
-<arg>cat ${TREX_CFG}</arg>
-<doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
-<status status="PASS" start="2026-04-06T16:41:32.306014" elapsed="0.047028"/>
-</kw>
-<kw name="Load Yaml" owner="YamlCompare">
-<msg time="2026-04-06T16:41:32.354240" level="INFO">${actual} = [{'port_limit': 2, 'version': 2, 'interfaces': ['0000.03:00.0', '0000.03:00.1'], 'port_info': [{'ip': '1.1.1.1', 'default_gw': '1.1.1.2'}, {'ip': '2.2.2.1', 'default_gw': '2.2.2.2'}], 'platform': {'ma...</msg>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-04-23T20:03:03.453934" level="INFO">${actual} = 2048</msg>
 <var>${actual}</var>
-<arg>${actual_text}</arg>
-<status status="PASS" start="2026-04-06T16:41:32.353139" elapsed="0.001118"/>
+<arg>${parts[-1]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-04-23T20:03:03.453501" elapsed="0.000447"/>
 </kw>
-<kw name="Get File" owner="OperatingSystem">
-<msg time="2026-04-06T16:41:32.354420" level="INFO" html="true">Getting file '&lt;a href="file:///home/paul/projects/trex-build-test/tests/expected/trex_cfg_expected.yaml"&gt;/home/paul/projects/trex-build-test/tests/expected/trex_cfg_expected.yaml&lt;/a&gt;'.</msg>
-<msg time="2026-04-06T16:41:32.354512" level="INFO">${expected_text} = ### TRex Dual-Port Configuration
-### Using PCI Passthrough Intel 82599ES 10Gb NICs
-
-- port_limit: 2
-  version: 2
-  interfaces:
-    - "0000.03:00.0"    # Port 0
-    - "0000.03:00.1"    # Port 1
-
-  port...</msg>
-<var>${expected_text}</var>
-<arg>${EXPECTED_CFG_FILE}</arg>
-<doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2026-04-06T16:41:32.354326" elapsed="0.000199"/>
-</kw>
-<kw name="Load Yaml" owner="YamlCompare">
-<msg time="2026-04-06T16:41:32.355412" level="INFO">${expected} = [{'port_limit': 2, 'version': 2, 'interfaces': ['0000.03:00.0', '0000.03:00.1'], 'port_info': [{'ip': '1.1.1.1', 'default_gw': '1.1.1.2'}, {'ip': '2.2.2.1', 'default_gw': '2.2.2.2'}], 'platform': {'ma...</msg>
-<var>${expected}</var>
-<arg>${expected_text}</arg>
-<status status="PASS" start="2026-04-06T16:41:32.354577" elapsed="0.000850"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${actual}</arg>
 <arg>${expected}</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2026-04-06T16:41:32.355482" elapsed="0.000211"/>
+<arg>Expected ${expected}, got ${actual}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-04-23T20:03:03.454001" elapsed="0.000214"/>
 </kw>
-<status status="PASS" start="2026-04-06T16:41:32.305887" elapsed="0.049843"/>
+<arg>2048</arg>
+<status status="PASS" start="2026-04-23T20:03:03.440049" elapsed="0.014197"/>
 </kw>
-<doc>Verifies TRex config file contents on remote TRex server matches expected config.</doc>
-<status status="PASS" start="2026-04-06T16:41:32.305640" elapsed="0.050170"/>
+<status status="PASS" start="2026-04-23T20:03:03.439663" elapsed="0.014665"/>
 </test>
-<kw name="Close All Connections" owner="SSHLibrary" type="TEARDOWN">
+<kw name="Close SSH Connection" owner="ssh" type="TEARDOWN">
+<kw name="Close All Connections" owner="SSHLibrary">
 <doc>Closes all open connections.</doc>
-<status status="PASS" start="2026-04-06T16:41:32.356109" elapsed="0.000140"/>
+<status status="PASS" start="2026-04-23T20:03:03.454693" elapsed="0.000138"/>
 </kw>
-<status status="PASS" start="2026-04-06T16:41:30.512654" elapsed="1.843614"/>
+<doc>Closes the SSH session.</doc>
+<status status="PASS" start="2026-04-23T20:03:03.454609" elapsed="0.000252"/>
+</kw>
+<status status="PASS" start="2026-04-23T20:03:01.777457" elapsed="1.677419"/>
 </suite>
 <statistics>
 <total>
-<stat pass="3" fail="0" skip="0">All Tests</stat>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="Verify Trex Env" id="s1" pass="3" fail="0" skip="0">Verify Trex Env</stat>
+<stat name="Host Config" id="s1" pass="1" fail="0" skip="0">Host Config</stat>
 </suite>
 </statistics>
 <errors>
