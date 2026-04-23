@@ -1,4 +1,4 @@
-HOST: 10.0.0.26
-NAME: trex01
+host: 10.0.0.26
+name: trex01
 trex_dir: /opt/trex
 trex_cfg: /etc/trex_cfg.yaml

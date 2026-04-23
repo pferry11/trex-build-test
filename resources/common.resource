@@ -9,10 +9,11 @@ Library    OperatingSystem
 #Connectivity Tests
 
 Verify host is reachable
-    [Arguments]    ${host}
+    [Arguments]    ${Address}
     [Documentation]    Pings the host to ensure it's reachable.
-    ${result}=    Run Process    ping    -c 1    ${host}    stdout=PIPE    stderr=PIPE
-    Should Be Equal As Integers    ${result.rc}    0    Host ${host} is not reachable. Ping output: ${result.stdout}
+    ${result}=    Run Process    ping    -c 1    ${Address}    stdout=PIPE    stderr=PIPE
+    #Log To Console    \n\n\ \ \ \ Host ${Address} is reachable.\n
+    Should Be Equal As Integers    ${result.rc}    0    Host ${Address} is not reachable. Ping output: ${result.stdout}
 
 #Host Configuration Tests
 Validation of Mellanox Driver
