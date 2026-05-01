@@ -1,73 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4.2 (Python 3.12.3 on linux)" generated="2026-04-23T21:19:06.935683" rpa="false" schemaversion="5">
-<suite id="s1" name="Host Config" source="/home/paul/projects/trex-build-test/tests/host_config.robot">
+<robot generator="Robot 7.4.2 (Python 3.12.3 on linux)" generated="2026-04-24T07:42:52.419822" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="/home/paul/projects/trex-build-test/tests">
+<suite id="s1-s1" name="Host Config" source="/home/paul/projects/trex-build-test/tests/host_config.robot">
 <kw name="Setup SSH Session" type="SETUP">
 <kw name="Load Credentials" owner="ssh">
 <kw name="Get Environment Variable" owner="OperatingSystem">
-<msg time="2026-04-23T21:19:07.012157" level="INFO">${user} = paul</msg>
+<msg time="2026-04-24T07:42:52.497171" level="INFO">${user} = paul</msg>
 <var>${user}</var>
 <arg>TREX_USER</arg>
 <doc>Returns the value of an environment variable with the given name.</doc>
-<status status="PASS" start="2026-04-23T21:19:07.012022" elapsed="0.000160"/>
+<status status="PASS" start="2026-04-24T07:42:52.497047" elapsed="0.000146"/>
 </kw>
 <kw name="Get Environment Variable" owner="OperatingSystem">
-<msg time="2026-04-23T21:19:07.012336" level="INFO">${pass} = Jake420g2301</msg>
+<msg time="2026-04-24T07:42:52.497342" level="INFO">${pass} = Jake420g2301</msg>
 <var>${pass}</var>
 <arg>TREX_PASS</arg>
 <doc>Returns the value of an environment variable with the given name.</doc>
-<status status="PASS" start="2026-04-23T21:19:07.012253" elapsed="0.000098"/>
+<status status="PASS" start="2026-04-24T07:42:52.497259" elapsed="0.000098"/>
 </kw>
 <kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2026-04-23T21:19:07.012685" level="INFO">Length is 4.</msg>
+<msg time="2026-04-24T07:42:52.497647" level="INFO">Length is 4.</msg>
 <arg>${user}</arg>
 <arg>TREX_USER is not set. Did you source trex.env?</arg>
 <doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2026-04-23T21:19:07.012411" elapsed="0.000300"/>
+<status status="PASS" start="2026-04-24T07:42:52.497414" elapsed="0.000259"/>
 </kw>
 <kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2026-04-23T21:19:07.012919" level="INFO">Length is 12.</msg>
+<msg time="2026-04-24T07:42:52.497886" level="INFO">Length is 12.</msg>
 <arg>${pass}</arg>
 <arg>TREX_PASS is not set. Did you source trex.env?</arg>
 <doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2026-04-23T21:19:07.012768" elapsed="0.000174"/>
+<status status="PASS" start="2026-04-24T07:42:52.497729" elapsed="0.000179"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2026-04-23T21:19:07.013503" level="INFO">${SSH_USER} = paul</msg>
+<msg time="2026-04-24T07:42:52.498429" level="INFO">${SSH_USER} = paul</msg>
 <arg>${SSH_USER}</arg>
 <arg>${user}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2026-04-23T21:19:07.013008" elapsed="0.000520"/>
+<status status="PASS" start="2026-04-24T07:42:52.497968" elapsed="0.000486"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2026-04-23T21:19:07.014060" level="INFO">${SSH_PASS} = Jake420g2301</msg>
+<msg time="2026-04-24T07:42:52.498932" level="INFO">${SSH_PASS} = Jake420g2301</msg>
 <arg>${SSH_PASS}</arg>
 <arg>${pass}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2026-04-23T21:19:07.013606" elapsed="0.000478"/>
+<status status="PASS" start="2026-04-24T07:42:52.498515" elapsed="0.000440"/>
 </kw>
 <doc>Ensures TREX_USER and TREX_PASS are available.</doc>
-<status status="PASS" start="2026-04-23T21:19:07.011716" elapsed="0.002424"/>
+<status status="PASS" start="2026-04-24T07:42:52.496764" elapsed="0.002225"/>
 </kw>
 <kw name="Open SSH Connection" owner="ssh">
 <kw name="Open Connection" owner="SSHLibrary">
 <arg>${host}</arg>
 <arg>timeout=${SSH_TIMEOUT}</arg>
 <doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
-<status status="PASS" start="2026-04-23T21:19:07.014368" elapsed="0.000180"/>
+<status status="PASS" start="2026-04-24T07:42:52.499211" elapsed="0.000159"/>
 </kw>
 <kw name="Login" owner="SSHLibrary">
-<msg time="2026-04-23T21:19:07.014769" level="INFO">Logging into '10.0.0.26:22' as 'paul'.</msg>
-<msg time="2026-04-23T21:19:08.615430" level="INFO">Read output: Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.15.0-213-generic x86_64)
+<msg time="2026-04-24T07:42:52.499528" level="INFO">Logging into '10.0.0.26:22' as 'paul'.</msg>
+<msg time="2026-04-24T07:42:54.083799" level="INFO">Read output: Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.15.0-213-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
  * Management:     https://landscape.canonical.com
  * Support:        https://ubuntu.com/pro
 
-  System information as of Thu Apr 23 21:19:07 BST 2026
+  System information as of Fri Apr 24 07:42:52 BST 2026
 
-  System load:  0.0                Processes:             186
-  Usage of /:   42.4% of 15.64GB   Users logged in:       1
-  Memory usage: 53%                IP address for ens224: 10.0.0.26
+  System load:  0.0                Processes:             185
+  Usage of /:   42.3% of 15.64GB   Users logged in:       1
+  Memory usage: 54%                IP address for ens224: 10.0.0.26
   Swap usage:   0%
 
  * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
@@ -87,27 +88,27 @@ New release '20.04.6 LTS' available.
 Run 'do-release-upgrade' to upgrade to it.
 
 
-Last login: Thu Apr 23 21:18:49 2026 from 10.0.0.152
+Last login: Fri Apr 24 07:37:13 2026 from 10.0.0.152
 paul@TRex01:~$</msg>
 <arg>${SSH_USER}</arg>
 <arg>${SSH_PASS}</arg>
 <doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
-<status status="PASS" start="2026-04-23T21:19:07.014659" elapsed="1.600869"/>
+<status status="PASS" start="2026-04-24T07:42:52.499435" elapsed="1.584480"/>
 </kw>
 <arg>${host}</arg>
 <doc>Opens SSH connection using credentials loaded earlier.</doc>
-<status status="PASS" start="2026-04-23T21:19:07.014217" elapsed="1.601399"/>
+<status status="PASS" start="2026-04-24T07:42:52.499060" elapsed="1.584937"/>
 </kw>
-<status status="PASS" start="2026-04-23T21:19:07.011373" elapsed="1.604285"/>
+<status status="PASS" start="2026-04-24T07:42:52.496464" elapsed="1.587577"/>
 </kw>
-<test id="s1-t1" name="Verify Host Connectivity" line="10">
+<test id="s1-s1-t1" name="Verify Host Connectivity" line="13">
 <kw name="Verify host is reachable" owner="common">
 <kw name="Run Process" owner="Process">
-<msg time="2026-04-23T21:19:08.616623" level="INFO">Starting process:
+<msg time="2026-04-24T07:42:54.085182" level="INFO">Starting process:
 ping "-c 1" 10.0.0.26</msg>
-<msg time="2026-04-23T21:19:08.617048" level="INFO">Waiting for process to complete.</msg>
-<msg time="2026-04-23T21:19:08.620327" level="INFO">Process completed.</msg>
-<msg time="2026-04-23T21:19:08.620408" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<msg time="2026-04-24T07:42:54.085617" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-04-24T07:42:54.088898" level="INFO">Process completed.</msg>
+<msg time="2026-04-24T07:42:54.088978" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
 <var>${result}</var>
 <arg>ping</arg>
 <arg>-c 1</arg>
@@ -115,90 +116,93 @@ ping "-c 1" 10.0.0.26</msg>
 <arg>stdout=PIPE</arg>
 <arg>stderr=PIPE</arg>
 <doc>Runs a process and waits for it to complete.</doc>
-<status status="PASS" start="2026-04-23T21:19:08.616294" elapsed="0.004135"/>
+<status status="PASS" start="2026-04-24T07:42:54.084839" elapsed="0.004163"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-04-23T21:19:08.621178" level="INFO">Argument types are:
+<msg time="2026-04-24T07:42:54.089866" level="INFO">Argument types are:
 &lt;class 'int'&gt;
 &lt;class 'str'&gt;</msg>
 <arg>${result.rc}</arg>
 <arg>0</arg>
 <arg>Host ${Address} is not reachable. Ping output: ${result.stdout}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-23T21:19:08.620540" elapsed="0.000679"/>
+<status status="PASS" start="2026-04-24T07:42:54.089135" elapsed="0.000768"/>
 </kw>
 <arg>${host}</arg>
 <doc>Pings the host to ensure it's reachable.</doc>
-<status status="PASS" start="2026-04-23T21:19:08.616079" elapsed="0.005173"/>
+<status status="PASS" start="2026-04-24T07:42:54.084593" elapsed="0.005344"/>
 </kw>
 <doc>Pinging 10.0.0.26/trex01</doc>
-<status status="PASS" start="2026-04-23T21:19:08.615765" elapsed="0.005567"/>
+<status status="PASS" start="2026-04-24T07:42:54.084199" elapsed="0.005820"/>
 </test>
-<test id="s1-t2" name="Hugepages Should Be Configured Correctly" line="14">
+<test id="s1-s1-t2" name="Hugepages Set According" line="17">
 <kw name="Verify Hugepages" owner="common">
 <kw name="Run Command" owner="ssh">
 <kw name="Execute Command" owner="SSHLibrary">
-<msg time="2026-04-23T21:19:08.621987" level="INFO">Executing command 'sysctl vm.nr_hugepages'.</msg>
-<msg time="2026-04-23T21:19:08.633657" level="INFO">Command exited with return code 0.</msg>
-<msg time="2026-04-23T21:19:08.633733" level="INFO">${output} = vm.nr_hugepages = 2048</msg>
+<msg time="2026-04-24T07:42:54.090751" level="INFO">Executing command 'sysctl vm.nr_hugepages'.</msg>
+<msg time="2026-04-24T07:42:54.102348" level="INFO">Command exited with return code 0.</msg>
+<msg time="2026-04-24T07:42:54.102419" level="INFO">${output} = vm.nr_hugepages = 2048</msg>
 <var>${output}</var>
 <arg>${cmd}</arg>
 <doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
-<status status="PASS" start="2026-04-23T21:19:08.621923" elapsed="0.011830"/>
+<status status="PASS" start="2026-04-24T07:42:54.090688" elapsed="0.011748"/>
 </kw>
 <return>
 <value>${output}</value>
-<status status="PASS" start="2026-04-23T21:19:08.633793" elapsed="0.000039"/>
+<status status="PASS" start="2026-04-24T07:42:54.102476" elapsed="0.000039"/>
 </return>
-<msg time="2026-04-23T21:19:08.633931" level="INFO">${output} = vm.nr_hugepages = 2048</msg>
+<msg time="2026-04-24T07:42:54.102624" level="INFO">${output} = vm.nr_hugepages = 2048</msg>
 <var>${output}</var>
 <arg>sysctl vm.nr_hugepages</arg>
 <doc>Runs a command and returns stdout.</doc>
-<status status="PASS" start="2026-04-23T21:19:08.621802" elapsed="0.012146"/>
+<status status="PASS" start="2026-04-24T07:42:54.090550" elapsed="0.012092"/>
 </kw>
 <kw name="Strip String" owner="String">
-<msg time="2026-04-23T21:19:08.634216" level="INFO">${clean} = vm.nr_hugepages = 2048</msg>
+<msg time="2026-04-24T07:42:54.102850" level="INFO">${clean} = vm.nr_hugepages = 2048</msg>
 <var>${clean}</var>
 <arg>${output}</arg>
 <doc>Remove leading and/or trailing whitespaces from the given string.</doc>
-<status status="PASS" start="2026-04-23T21:19:08.634023" elapsed="0.000212"/>
+<status status="PASS" start="2026-04-24T07:42:54.102730" elapsed="0.000133"/>
 </kw>
 <kw name="Split String" owner="String">
-<msg time="2026-04-23T21:19:08.634472" level="INFO">@{parts} = [ vm.nr_hugepages | = | 2048 ]</msg>
+<msg time="2026-04-24T07:42:54.103028" level="INFO">@{parts} = [ vm.nr_hugepages | = | 2048 ]</msg>
 <var>@{parts}</var>
 <arg>${clean}</arg>
 <arg>${SPACE}</arg>
 <doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
-<status status="PASS" start="2026-04-23T21:19:08.634309" elapsed="0.000180"/>
+<status status="PASS" start="2026-04-24T07:42:54.102914" elapsed="0.000127"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-04-23T21:19:08.634947" level="INFO">${actual} = 2048</msg>
+<msg time="2026-04-24T07:42:54.103422" level="INFO">${actual} = 2048</msg>
 <var>${actual}</var>
 <arg>${parts[-1]}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-04-23T21:19:08.634560" elapsed="0.000401"/>
+<status status="PASS" start="2026-04-24T07:42:54.103110" elapsed="0.000326"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${actual}</arg>
 <arg>${expected}</arg>
 <arg>Expected ${expected}, got ${actual}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-04-23T21:19:08.635047" elapsed="0.000211"/>
+<status status="PASS" start="2026-04-24T07:42:54.103521" elapsed="0.000197"/>
 </kw>
-<arg>2048</arg>
-<status status="PASS" start="2026-04-23T21:19:08.621654" elapsed="0.013639"/>
+<arg>${Hugepages}</arg>
+<status status="PASS" start="2026-04-24T07:42:54.090384" elapsed="0.013366"/>
 </kw>
-<status status="PASS" start="2026-04-23T21:19:08.621450" elapsed="0.013911"/>
+<doc>Hugepages are set to: 2048</doc>
+<status status="PASS" start="2026-04-24T07:42:54.090161" elapsed="0.013662"/>
 </test>
 <kw name="Close SSH Connection" owner="ssh" type="TEARDOWN">
 <kw name="Close All Connections" owner="SSHLibrary">
 <doc>Closes all open connections.</doc>
-<status status="PASS" start="2026-04-23T21:19:08.635733" elapsed="0.000124"/>
+<status status="PASS" start="2026-04-24T07:42:54.104217" elapsed="0.000122"/>
 </kw>
 <doc>Closes the SSH session.</doc>
-<status status="PASS" start="2026-04-23T21:19:08.635645" elapsed="0.000241"/>
+<status status="PASS" start="2026-04-24T07:42:54.104127" elapsed="0.000242"/>
 </kw>
-<status status="PASS" start="2026-04-23T21:19:06.936198" elapsed="1.699703"/>
+<status status="PASS" start="2026-04-24T07:42:52.437623" elapsed="1.666761"/>
+</suite>
+<status status="PASS" start="2026-04-24T07:42:52.420336" elapsed="1.684327"/>
 </suite>
 <statistics>
 <total>
@@ -207,7 +211,8 @@ ping "-c 1" 10.0.0.26</msg>
 <tag>
 </tag>
 <suite>
-<stat name="Host Config" id="s1" pass="2" fail="0" skip="0">Host Config</stat>
+<stat name="Tests" id="s1" pass="2" fail="0" skip="0">Tests</stat>
+<stat name="Host Config" id="s1-s1" pass="2" fail="0" skip="0">Tests.Host Config</stat>
 </suite>
 </statistics>
 <errors>
