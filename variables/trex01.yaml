@@ -18,7 +18,7 @@ Hugepages:  2048
 python_version: 6.9
 
 # Expected pip version for runtime dependency check
-pip_version:   9.0.1
+pip_version: 9.0.1
 
 # Required pip packages for TRex
 pip_packages:
@@ -26,5 +26,28 @@ pip_packages:
   - scapy
 
 # TRex installation paths
-trex_dir: /opt/trex
+trex_dir: /opt/Trex
+trex_version: 3.06
+trex_local_cfg: trex_cfg.yaml
 trex_cfg: /etc/trex_cfg.yaml
+
+# Expected contents of the TRex configuration file (trex_cfg.yaml)
+trex_expected_cfg:
+  version: 2
+
+  interfaces:
+    - "03:00.0"
+    - "03:00.1"
+
+  port_info:
+    - ip: 1.1.1.1
+      default_gw: 2.2.2.2
+    - ip: 2.2.2.2
+      default_gw: 1.1.1.1
+
+  platform:
+    master_thread_id: 0
+    latency_thread_id: 1
+    dual_if:
+      - socket: 0
+        threads: [2, 3]

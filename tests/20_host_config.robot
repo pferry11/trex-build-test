@@ -11,7 +11,6 @@ Suite Teardown    Close SSH Connection
 
 *** Test Cases ***
 
-
 Hugepages Set According
     [Documentation]    Hugepages are set to: ${Hugepages}
     Verify Hugepages    ${Hugepages}
@@ -32,3 +31,4 @@ Check host network port names & bus addresses
 Setup SSH Session
     Load Credentials
     Open SSH Connection    ${host}
+    Clear Console

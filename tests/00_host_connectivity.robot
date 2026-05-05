@@ -14,4 +14,3 @@ Verify Host Connectivity
     IF    not ${ok}
         Fatal Error    Connectivity test failed — aborting suite
     END
-
