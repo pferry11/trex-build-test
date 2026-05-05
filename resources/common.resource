@@ -55,26 +55,37 @@ Check host network port names & bus addresses
 
 #Runtime Dependency Tests
 
-Pyhon3 version check
-    [Arguments]    ${host}
-    [Documentation]    Verifies that Python 3 is installed on the host.
-    ${cmd}=    Set Variable    ssh ${host} "python3 --version"
-    ${result}=    Run Process    ${cmd}    stdout=PIPE    stderr=PIPE
-    Should Contain    ${result.stdout}    Python 3    Python 3 is not installed on host ${host}. Command output: ${result.stdout}
+Python3 version check
+    [Arguments]    ${expected_version}
+    [Documentation]    Verifies that Python 3 is installed and matches the expected version.
+    ${output}=    Run Command    python3 --version
+    ${clean}=     Strip String    ${output}
+    Should Be Equal    ${clean}    Python 3.${expected_version}
+    ...    Expected Python 3.${expected_version}, but got: ${clean}
 
 PIP Version check
-    [Arguments]    ${host}
-    [Documentation]    Checks if pip is installed on the host.
-    ${cmd}=    Set Variable    ssh ${host} "pip3 --version"
-    ${result}=    Run Process    ${cmd}    stdout=PIPE    stderr=PIPE
-    Should Contain    ${result.stdout}    pip 20.0.2    Pip is not installed or version is incorrect on host ${host}. Command output: ${result.stdout}
+    [Arguments]    ${expected_version}
+    [Documentation]    Checks if pip is installed and matches the expected version.
+    ${output}=    Run Command    pip3 --version
+    ${clean}=     Strip String    ${output}
+    Should Contain    ${clean}    pip ${expected_version}
+    ...    Expected pip ${expected_version}, but got: ${clean}
 
 PIP Package check
-    [Arguments]    ${host}    ${package}
+    [Arguments]    ${package}
     [Documentation]    Verifies that a specific pip package is installed on the host.
-    ${cmd}=    Set Variable    ssh ${host} "pip3 show ${package}"
-    ${result}=    Run Process    ${cmd}    stdout=PIPE    stderr=PIPE
-    Should Contain    ${result.stdout}    Name: ${package}    Pip package ${package} is not installed on host ${host}. Command output: ${result.stdout}
+    ${output}=    Run Command    pip3 show ${package}
+    ${clean}=     Strip String    ${output}
+    Should Contain    ${clean}    Name: ${package}
+    ...    Pip package ${package} is not installed. Output: ${clean}
+
+PIP Packages check
+    [Arguments]    @{packages}
+    [Documentation]    Loops through a list of pip packages and verifies each is installed.
+
+    FOR    ${pkg}    IN    @{packages}
+        PIP Package check    ${pkg}
+    END
 
 #Application Validation Tests
 

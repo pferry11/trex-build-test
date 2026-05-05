@@ -7,26 +7,23 @@ Suite Setup       Setup SSH Session
 Suite Teardown    Close SSH Connection
 
 ***Variables ***
-${Hugepages}    2048
+#${python_version}    6.9
+#${pip_version}    9.0.1
 
 *** Test Cases ***
 
+Verify Python 3 Installation & Version
+    [Documentation]    Verifies that Python 3 is installed on the host.
+    Python3 version check    ${python_version}  
 
-Hugepages Set According
-    [Documentation]    Hugepages are set to: ${Hugepages}
-    Verify Hugepages    ${Hugepages}
+Check PIP Installation & Version
+    [Documentation]    Checks if pip is installed on the host.
+    PIP Version check    ${pip_version}    
 
-Validation of Mellanox Driver
-    [Documentation]    Checks if Mellanox driver is installed on the host.
-    Validation of Mellanox Driver    ${host}
-
-Check DOCA-OFED Installation
-    [Documentation]    Verifies if DOCA-OFED is installed on the host.
-    Check DOCA-OFED Installation    ${host}
-
-Check host network port names & bus addresses
-    [Documentation]    Verifies that the network ports have the expected names and bus addresses.
-    Check host network port names & bus addresses    @{pci_nics}    
+Check Required PIP Packages
+    [Documentation]    Verifies that required pip packages are installed on the host.
+    PIP Packages check    @{pip_packages}
+     
     
 *** Keywords ***
 Setup SSH Session

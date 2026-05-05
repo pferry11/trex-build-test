@@ -1,337 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4.2 (Python 3.12.3 on linux)" generated="2026-05-05T12:26:06.395757" rpa="false" schemaversion="5">
-<suite id="s1" name="Tests" source="/home/paul/projects/trex-build-test/tests">
-<suite id="s1-s1" name="00 Host Connectivity" source="/home/paul/projects/trex-build-test/tests/00_host_connectivity.robot">
-<test id="s1-s1-t1" name="Verify Host Connectivity" line="9">
-<kw name="Run Keyword And Return Status" owner="BuiltIn">
-<kw name="Verify host is reachable" owner="common">
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2026-05-05T12:26:06.426439" level="INFO">${platform} = Linux</msg>
-<var>${platform}</var>
-<arg>platform.system()</arg>
-<arg>modules=platform</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2026-05-05T12:26:06.425660" elapsed="0.000801"/>
-</kw>
-<kw name="Set Variable If" owner="BuiltIn">
-<msg time="2026-05-05T12:26:06.426724" level="INFO">${count_flag} = -c</msg>
-<var>${count_flag}</var>
-<arg>"${platform}"=="Windows"</arg>
-<arg>-n</arg>
-<arg>-c</arg>
-<doc>Sets variable based on the given condition.</doc>
-<status status="PASS" start="2026-05-05T12:26:06.426532" elapsed="0.000208"/>
-</kw>
-<kw name="Run Process" owner="Process">
-<msg time="2026-05-05T12:26:06.427047" level="INFO">Starting process:
-ping "-c 2" 10.0.0.26</msg>
-<msg time="2026-05-05T12:26:06.427435" level="INFO">Waiting for process to complete.</msg>
-<msg time="2026-05-05T12:26:07.445812" level="INFO">Process completed.</msg>
-<msg time="2026-05-05T12:26:07.445946" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
-<var>${result}</var>
-<arg>ping</arg>
-<arg>${count_flag} 2</arg>
-<arg>${Address}</arg>
-<arg>shell=False</arg>
-<arg>stdout=PIPE</arg>
-<arg>stderr=PIPE</arg>
-<doc>Runs a process and waits for it to complete.</doc>
-<status status="PASS" start="2026-05-05T12:26:06.426800" elapsed="1.019163"/>
-</kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-05-05T12:26:07.446804" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<arg>${result.rc}</arg>
-<arg>0</arg>
-<arg>Host ${Address} is not reachable. Ping output:\n ${result.stdout}\n</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.446123" elapsed="0.000720"/>
-</kw>
-<arg>${host}</arg>
-<doc>Pings the host to ensure it's reachable.</doc>
-<status status="PASS" start="2026-05-05T12:26:06.425445" elapsed="1.021445"/>
-</kw>
-<msg time="2026-05-05T12:26:07.446936" level="INFO">${ok} = True</msg>
-<var>${ok}</var>
-<arg>Verify host is reachable</arg>
-<arg>${host}</arg>
-<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
-<status status="PASS" start="2026-05-05T12:26:06.425181" elapsed="1.021768"/>
-</kw>
-<if>
-<branch type="IF" condition="not ${ok}">
-<kw name="Fatal Error" owner="BuiltIn">
-<arg>Connectivity test failed — aborting suite</arg>
-<doc>Stops the whole test execution.</doc>
-<status status="NOT RUN" start="2026-05-05T12:26:07.447187" elapsed="0.000011"/>
-</kw>
-<status status="NOT RUN" start="2026-05-05T12:26:07.447048" elapsed="0.000169"/>
-</branch>
-<status status="PASS" start="2026-05-05T12:26:07.447027" elapsed="0.000208"/>
-</if>
-<doc>Pinging 10.0.0.26/trex01</doc>
-<status status="PASS" start="2026-05-05T12:26:06.424734" elapsed="1.022585"/>
-</test>
-<status status="PASS" start="2026-05-05T12:26:06.413517" elapsed="1.034033"/>
-</suite>
-<suite id="s1-s2" name="10 SSH" source="/home/paul/projects/trex-build-test/tests/10_SSH.robot">
-<test id="s1-s2-t1" name="Validate SSH Credentials" line="6">
-<kw name="Validate SSH Credentials" owner="ssh">
-<kw name="Load Credentials" owner="ssh">
-<kw name="Get Environment Variable" owner="OperatingSystem">
-<msg time="2026-05-05T12:26:07.498589" level="INFO">${user} = paul</msg>
-<var>${user}</var>
-<arg>TREX_USER</arg>
-<doc>Returns the value of an environment variable with the given name.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.498499" elapsed="0.000106"/>
-</kw>
-<kw name="Get Environment Variable" owner="OperatingSystem">
-<msg time="2026-05-05T12:26:07.498724" level="INFO">${pass} = Jake420g2301</msg>
-<var>${pass}</var>
-<arg>TREX_PASS</arg>
-<doc>Returns the value of an environment variable with the given name.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.498657" elapsed="0.000080"/>
-</kw>
-<kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2026-05-05T12:26:07.499000" level="INFO">Length is 4.</msg>
-<arg>${user}</arg>
-<arg>TREX_USER is not set. Did you source trex.env?</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.498783" elapsed="0.000242"/>
-</kw>
-<kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2026-05-05T12:26:07.499254" level="INFO">Length is 12.</msg>
-<arg>${pass}</arg>
-<arg>TREX_PASS is not set. Did you source trex.env?</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.499082" elapsed="0.000195"/>
-</kw>
-<kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2026-05-05T12:26:07.499857" level="INFO">${SSH_USER} = paul</msg>
-<arg>${SSH_USER}</arg>
-<arg>${user}</arg>
-<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.499336" elapsed="0.000545"/>
-</kw>
-<kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2026-05-05T12:26:07.500399" level="INFO">${SSH_PASS} = Jake420g2301</msg>
-<arg>${SSH_PASS}</arg>
-<arg>${pass}</arg>
-<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.499940" elapsed="0.000483"/>
-</kw>
-<doc>Ensures TREX_USER and TREX_PASS are available.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.498336" elapsed="0.002123"/>
-</kw>
-<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
-<kw name="Open Connection" owner="SSHLibrary">
-<arg>${host}</arg>
-<arg>timeout=${SSH_TIMEOUT}</arg>
-<doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.500686" elapsed="0.000152"/>
-</kw>
-<msg time="2026-05-05T12:26:07.500894" level="INFO">${status} = PASS</msg>
-<msg time="2026-05-05T12:26:07.500916" level="INFO">${message} = 1</msg>
-<var>${status}</var>
-<var>${message}</var>
-<arg>SSHLibrary.Open Connection</arg>
-<arg>${host}</arg>
-<arg>timeout=${SSH_TIMEOUT}</arg>
-<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.500513" elapsed="0.000413"/>
-</kw>
-<if>
-<branch type="IF" condition="'${status}' != 'PASS'">
-<if>
-<branch type="IF" condition="'Connection refused' in '${message}'">
-<kw name="Fatal Error" owner="BuiltIn">
-<arg>SSH connection refused — host reachable but port 22 is closed.</arg>
-<doc>Stops the whole test execution.</doc>
-<status status="NOT RUN" start="2026-05-05T12:26:07.501133" elapsed="0.000012"/>
-</kw>
-<status status="NOT RUN" start="2026-05-05T12:26:07.501057" elapsed="0.000107"/>
-</branch>
-<branch type="ELSE IF" condition="'timed out' in '${message}' or 'Timeout' in '${message}'">
-<kw name="Fatal Error" owner="BuiltIn">
-<arg>SSH connection timed out — host unreachable or firewall blocking.</arg>
-<doc>Stops the whole test execution.</doc>
-<status status="NOT RUN" start="2026-05-05T12:26:07.501223" elapsed="0.000010"/>
-</kw>
-<status status="NOT RUN" start="2026-05-05T12:26:07.501179" elapsed="0.000069"/>
-</branch>
-<branch type="ELSE">
-<kw name="Fatal Error" owner="BuiltIn">
-<arg>SSH connection failed: ${message}</arg>
-<doc>Stops the whole test execution.</doc>
-<status status="NOT RUN" start="2026-05-05T12:26:07.501303" elapsed="0.000009"/>
-</kw>
-<status status="NOT RUN" start="2026-05-05T12:26:07.501262" elapsed="0.000064"/>
-</branch>
-<status status="NOT RUN" start="2026-05-05T12:26:07.501048" elapsed="0.000288"/>
-</if>
-<status status="NOT RUN" start="2026-05-05T12:26:07.500978" elapsed="0.000371"/>
-</branch>
-<status status="PASS" start="2026-05-05T12:26:07.500964" elapsed="0.000395"/>
-</if>
-<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
-<kw name="Login" owner="SSHLibrary">
-<msg time="2026-05-05T12:26:07.501719" level="INFO">Logging into '10.0.0.26:22' as 'paul'.</msg>
-<msg time="2026-05-05T12:26:09.083614" level="INFO">Read output: Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.15.0-213-generic x86_64)
-
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu.com/pro
-
-  System information as of Tue May  5 12:26:07 BST 2026
-
-  System load:  0.0                Processes:             201
-  Usage of /:   42.4% of 15.64GB   Users logged in:       1
-  Memory usage: 55%                IP address for ens224: 10.0.0.26
-  Swap usage:   0%
-
- * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
-   just raised the bar for easy, resilient and secure K8s cluster deployment.
-
-   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
-
-Expanded Security Maintenance for Infrastructure is not enabled.
-
-0 updates can be applied immediately.
-
-161 additional security updates can be applied with ESM Infra.
-Learn more about enabling ESM Infra service for Ubuntu 18.04 at
-https://ubuntu.com/18-04
-
-New release '20.04.6 LTS' available.
-Run 'do-release-upgrade' to upgrade to it.
-
-
-Last login: Tue May  5 12:25:52 2026 from 10.0.0.152
-paul@TRex01:~$</msg>
-<arg>${SSH_USER}</arg>
-<arg>${SSH_PASS}</arg>
-<doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.501620" elapsed="1.582092"/>
-</kw>
-<msg time="2026-05-05T12:26:09.083825" level="INFO">${login_status} = PASS</msg>
-<msg time="2026-05-05T12:26:09.083867" level="INFO">${login_message} = Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.15.0-213-generic x86_64)
-
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu...</msg>
-<var>${login_status}</var>
-<var>${login_message}</var>
-<arg>SSHLibrary.Login</arg>
-<arg>${SSH_USER}</arg>
-<arg>${SSH_PASS}</arg>
-<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.501456" elapsed="1.582427"/>
-</kw>
-<if>
-<branch type="IF" condition="'${login_status}' != 'PASS'">
-<if>
-<branch type="IF" condition="'Authentication failed' in '${login_message}'">
-<kw name="Fatal Error" owner="BuiltIn">
-<arg>SSH login failed — invalid username or password.</arg>
-<doc>Stops the whole test execution.</doc>
-<status status="NOT RUN" start="2026-05-05T12:26:09.084209" elapsed="0.000015"/>
-</kw>
-<status status="NOT RUN" start="2026-05-05T12:26:09.084078" elapsed="0.000166"/>
-</branch>
-<branch type="ELSE">
-<kw name="Fatal Error" owner="BuiltIn">
-<arg>SSH login failed: ${login_message}</arg>
-<doc>Stops the whole test execution.</doc>
-<status status="NOT RUN" start="2026-05-05T12:26:09.084303" elapsed="0.000009"/>
-</kw>
-<status status="NOT RUN" start="2026-05-05T12:26:09.084259" elapsed="0.000066"/>
-</branch>
-<status status="NOT RUN" start="2026-05-05T12:26:09.084069" elapsed="0.000267"/>
-</if>
-<status status="NOT RUN" start="2026-05-05T12:26:09.083958" elapsed="0.000390"/>
-</branch>
-<status status="PASS" start="2026-05-05T12:26:09.083938" elapsed="0.000419"/>
-</if>
-<kw name="Close All Connections" owner="SSHLibrary">
-<doc>Closes all open connections.</doc>
-<status status="PASS" start="2026-05-05T12:26:09.084405" elapsed="0.000123"/>
-</kw>
-<arg>${host}</arg>
-<doc>Loads credentials and attempts an SSH login with detailed error reporting.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.498137" elapsed="1.586426"/>
-</kw>
-<doc>Ensures SSH credentials and login work before running full suite.</doc>
-<status status="PASS" start="2026-05-05T12:26:07.497732" elapsed="1.586936"/>
-</test>
-<status status="PASS" start="2026-05-05T12:26:07.447771" elapsed="1.637081"/>
-</suite>
-<suite id="s1-s3" name="Host Config" source="/home/paul/projects/trex-build-test/tests/host_config.robot">
+<robot generator="Robot 7.4.2 (Python 3.12.3 on linux)" generated="2026-05-05T14:06:56.494140" rpa="false" schemaversion="5">
+<suite id="s1" name="Runtime Dependency Checks" source="/home/paul/projects/trex-build-test/tests/Runtime Dependency Checks.robot">
 <kw name="Setup SSH Session" type="SETUP">
 <kw name="Load Credentials" owner="ssh">
 <kw name="Get Environment Variable" owner="OperatingSystem">
-<msg time="2026-05-05T12:26:09.087619" level="INFO">${user} = paul</msg>
+<msg time="2026-05-05T14:06:56.574275" level="INFO">${user} = paul</msg>
 <var>${user}</var>
 <arg>TREX_USER</arg>
 <doc>Returns the value of an environment variable with the given name.</doc>
-<status status="PASS" start="2026-05-05T12:26:09.087541" elapsed="0.000092"/>
+<status status="PASS" start="2026-05-05T14:06:56.574147" elapsed="0.000153"/>
 </kw>
 <kw name="Get Environment Variable" owner="OperatingSystem">
-<msg time="2026-05-05T12:26:09.087753" level="INFO">${pass} = Jake420g2301</msg>
+<msg time="2026-05-05T14:06:56.574453" level="INFO">${pass} = Jake420g2301</msg>
 <var>${pass}</var>
 <arg>TREX_PASS</arg>
 <doc>Returns the value of an environment variable with the given name.</doc>
-<status status="PASS" start="2026-05-05T12:26:09.087687" elapsed="0.000083"/>
+<status status="PASS" start="2026-05-05T14:06:56.574369" elapsed="0.000099"/>
 </kw>
 <kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2026-05-05T12:26:09.087977" level="INFO">Length is 4.</msg>
+<msg time="2026-05-05T14:06:56.574830" level="INFO">Length is 4.</msg>
 <arg>${user}</arg>
 <arg>TREX_USER is not set. Did you source trex.env?</arg>
 <doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2026-05-05T12:26:09.087817" elapsed="0.000181"/>
+<status status="PASS" start="2026-05-05T14:06:56.574528" elapsed="0.000328"/>
 </kw>
 <kw name="Should Not Be Empty" owner="BuiltIn">
-<msg time="2026-05-05T12:26:09.088213" level="INFO">Length is 12.</msg>
+<msg time="2026-05-05T14:06:56.575081" level="INFO">Length is 12.</msg>
 <arg>${pass}</arg>
 <arg>TREX_PASS is not set. Did you source trex.env?</arg>
 <doc>Verifies that the given item is not empty.</doc>
-<status status="PASS" start="2026-05-05T12:26:09.088046" elapsed="0.000189"/>
+<status status="PASS" start="2026-05-05T14:06:56.574913" elapsed="0.000209"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2026-05-05T12:26:09.088722" level="INFO">${SSH_USER} = paul</msg>
+<msg time="2026-05-05T14:06:56.575693" level="INFO">${SSH_USER} = paul</msg>
 <arg>${SSH_USER}</arg>
 <arg>${user}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2026-05-05T12:26:09.088297" elapsed="0.000447"/>
+<status status="PASS" start="2026-05-05T14:06:56.575188" elapsed="0.000530"/>
 </kw>
 <kw name="Set Suite Variable" owner="BuiltIn">
-<msg time="2026-05-05T12:26:09.089225" level="INFO">${SSH_PASS} = Jake420g2301</msg>
+<msg time="2026-05-05T14:06:56.576248" level="INFO">${SSH_PASS} = Jake420g2301</msg>
 <arg>${SSH_PASS}</arg>
 <arg>${pass}</arg>
 <doc>Makes a variable available everywhere within the scope of the current suite.</doc>
-<status status="PASS" start="2026-05-05T12:26:09.088802" elapsed="0.000446"/>
+<status status="PASS" start="2026-05-05T14:06:56.575780" elapsed="0.000493"/>
 </kw>
 <doc>Ensures TREX_USER and TREX_PASS are available.</doc>
-<status status="PASS" start="2026-05-05T12:26:09.087462" elapsed="0.001817"/>
+<status status="PASS" start="2026-05-05T14:06:56.573824" elapsed="0.002484"/>
 </kw>
 <kw name="Open SSH Connection" owner="ssh">
 <kw name="Open Connection" owner="SSHLibrary">
 <arg>${host}</arg>
 <arg>timeout=${SSH_TIMEOUT}</arg>
 <doc>Opens a new SSH connection to the given ``host`` and ``port``.</doc>
-<status status="PASS" start="2026-05-05T12:26:09.089461" elapsed="0.000153"/>
+<status status="PASS" start="2026-05-05T14:06:56.576509" elapsed="0.000170"/>
 </kw>
 <kw name="Login" owner="SSHLibrary">
-<msg time="2026-05-05T12:26:09.089767" level="INFO">Logging into '10.0.0.26:22' as 'paul'.</msg>
-<msg time="2026-05-05T12:26:10.695571" level="INFO">Read output: Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.15.0-213-generic x86_64)
+<msg time="2026-05-05T14:06:56.576846" level="INFO">Logging into '10.0.0.26:22' as 'paul'.</msg>
+<msg time="2026-05-05T14:06:58.204420" level="INFO">Read output: Welcome to Ubuntu 18.04.6 LTS (GNU/Linux 4.15.0-213-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
  * Management:     https://landscape.canonical.com
  * Support:        https://ubuntu.com/pro
 
-  System information as of Tue May  5 12:26:09 BST 2026
+  System information as of Tue May  5 14:06:56 BST 2026
 
-  System load:  0.0                Processes:             201
+  System load:  0.0                Processes:             197
   Usage of /:   42.4% of 15.64GB   Users logged in:       1
   Memory usage: 55%                IP address for ens224: 10.0.0.26
   Swap usage:   0%
@@ -353,232 +87,262 @@ New release '20.04.6 LTS' available.
 Run 'do-release-upgrade' to upgrade to it.
 
 
-Last login: Tue May  5 12:26:08 2026 from 10.0.0.152
+Last login: Tue May  5 12:59:16 2026 from 10.0.0.152
 paul@TRex01:~$</msg>
 <arg>${SSH_USER}</arg>
 <arg>${SSH_PASS}</arg>
 <doc>Logs into the SSH server with the given ``username`` and ``password``.</doc>
-<status status="PASS" start="2026-05-05T12:26:09.089669" elapsed="1.606002"/>
+<status status="PASS" start="2026-05-05T14:06:56.576742" elapsed="1.627780"/>
 </kw>
 <arg>${host}</arg>
 <doc>Opens SSH connection using credentials loaded earlier.</doc>
-<status status="PASS" start="2026-05-05T12:26:09.089348" elapsed="1.606397"/>
+<status status="PASS" start="2026-05-05T14:06:56.576384" elapsed="1.628227"/>
 </kw>
-<status status="PASS" start="2026-05-05T12:26:09.087328" elapsed="1.608545"/>
+<status status="PASS" start="2026-05-05T14:06:56.573613" elapsed="1.631041"/>
 </kw>
-<test id="s1-s3-t1" name="Hugepages Set According" line="15">
-<kw name="Verify Hugepages" owner="common">
+<test id="s1-t1" name="Verify Python 3 Installation &amp; Version" line="15">
+<kw name="Python3 version check" owner="common">
 <kw name="Run Command" owner="ssh">
 <kw name="Execute Command" owner="SSHLibrary">
-<msg time="2026-05-05T12:26:10.696778" level="INFO">Executing command 'sysctl vm.nr_hugepages'.</msg>
-<msg time="2026-05-05T12:26:10.709270" level="INFO">Command exited with return code 0.</msg>
-<msg time="2026-05-05T12:26:10.709348" level="INFO">${output} = vm.nr_hugepages = 2048</msg>
+<msg time="2026-05-05T14:06:58.205528" level="INFO">Executing command 'python3 --version'.</msg>
+<msg time="2026-05-05T14:06:58.218297" level="INFO">Command exited with return code 0.</msg>
+<msg time="2026-05-05T14:06:58.218375" level="INFO">${output} = Python 3.6.9</msg>
 <var>${output}</var>
 <arg>${cmd}</arg>
 <doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.696709" elapsed="0.012658"/>
+<status status="PASS" start="2026-05-05T14:06:58.205455" elapsed="0.012939"/>
 </kw>
 <return>
 <value>${output}</value>
-<status status="PASS" start="2026-05-05T12:26:10.709409" elapsed="0.000043"/>
+<status status="PASS" start="2026-05-05T14:06:58.218436" elapsed="0.000042"/>
 </return>
-<msg time="2026-05-05T12:26:10.709551" level="INFO">${output} = vm.nr_hugepages = 2048</msg>
+<msg time="2026-05-05T14:06:58.218576" level="INFO">${output} = Python 3.6.9</msg>
 <var>${output}</var>
-<arg>sysctl vm.nr_hugepages</arg>
+<arg>python3 --version</arg>
 <doc>Runs a command and returns stdout.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.696561" elapsed="0.013007"/>
+<status status="PASS" start="2026-05-05T14:06:58.205316" elapsed="0.013277"/>
 </kw>
 <kw name="Strip String" owner="String">
-<msg time="2026-05-05T12:26:10.709930" level="INFO">${clean} = vm.nr_hugepages = 2048</msg>
+<msg time="2026-05-05T14:06:58.218956" level="INFO">${clean} = Python 3.6.9</msg>
 <var>${clean}</var>
 <arg>${output}</arg>
 <doc>Remove leading and/or trailing whitespaces from the given string.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.709653" elapsed="0.000295"/>
+<status status="PASS" start="2026-05-05T14:06:58.218670" elapsed="0.000304"/>
 </kw>
-<kw name="Split String" owner="String">
-<msg time="2026-05-05T12:26:10.710212" level="INFO">@{parts} = [ vm.nr_hugepages | = | 2048 ]</msg>
-<var>@{parts}</var>
+<kw name="Should Be Equal" owner="BuiltIn">
 <arg>${clean}</arg>
-<arg>${SPACE}</arg>
-<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.710024" elapsed="0.000202"/>
+<arg>Python 3.${expected_version}</arg>
+<arg>Expected Python 3.${expected_version}, but got: ${clean}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-05-05T14:06:58.219066" elapsed="0.000308"/>
 </kw>
-<kw name="Set Variable" owner="BuiltIn">
-<msg time="2026-05-05T12:26:10.710638" level="INFO">${actual} = 2048</msg>
-<var>${actual}</var>
-<arg>${parts[-1]}</arg>
-<doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.710280" elapsed="0.000372"/>
+<arg>${python_version}</arg>
+<doc>Verifies that Python 3 is installed and matches the expected version.</doc>
+<status status="PASS" start="2026-05-05T14:06:58.205075" elapsed="0.014333"/>
 </kw>
-<kw name="Should Be Equal As Integers" owner="BuiltIn">
-<msg time="2026-05-05T12:26:10.710872" level="INFO">Argument types are:
-&lt;class 'str'&gt;
-&lt;class 'int'&gt;</msg>
-<arg>${actual}</arg>
-<arg>${expected}</arg>
-<arg>Expected ${expected}, got ${actual}</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.710707" elapsed="0.000197"/>
-</kw>
-<arg>${Hugepages}</arg>
-<status status="PASS" start="2026-05-05T12:26:10.696355" elapsed="0.014579"/>
-</kw>
-<doc>Hugepages are set to: 2048</doc>
-<status status="PASS" start="2026-05-05T12:26:10.695974" elapsed="0.015031"/>
+<doc>Verifies that Python 3 is installed on the host.</doc>
+<status status="PASS" start="2026-05-05T14:06:58.204710" elapsed="0.014775"/>
 </test>
-<test id="s1-s3-t2" name="Validation of Mellanox Driver" line="19">
-<kw name="Validation of Mellanox Driver" owner="common">
+<test id="s1-t2" name="Check PIP Installation &amp; Version" line="19">
+<kw name="PIP Version check" owner="common">
 <kw name="Run Command" owner="ssh">
 <kw name="Execute Command" owner="SSHLibrary">
-<msg time="2026-05-05T12:26:10.711681" level="INFO">Executing command 'lsmod | grep mlx5_core'.</msg>
-<msg time="2026-05-05T12:26:10.757612" level="INFO">Command exited with return code 1.</msg>
-<msg time="2026-05-05T12:26:10.757693" level="INFO">${output} = </msg>
+<msg time="2026-05-05T14:06:58.220150" level="INFO">Executing command 'pip3 --version'.</msg>
+<msg time="2026-05-05T14:06:59.261634" level="INFO">Command exited with return code 0.</msg>
+<msg time="2026-05-05T14:06:59.261781" level="INFO">${output} = pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.6)</msg>
 <var>${output}</var>
 <arg>${cmd}</arg>
 <doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.711617" elapsed="0.046094"/>
+<status status="PASS" start="2026-05-05T14:06:58.220069" elapsed="1.041733"/>
 </kw>
 <return>
 <value>${output}</value>
-<status status="PASS" start="2026-05-05T12:26:10.757751" elapsed="0.000028"/>
+<status status="PASS" start="2026-05-05T14:06:59.261859" elapsed="0.000045"/>
 </return>
-<msg time="2026-05-05T12:26:10.757874" level="INFO">${output} = </msg>
+<msg time="2026-05-05T14:06:59.262020" level="INFO">${output} = pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.6)</msg>
 <var>${output}</var>
-<arg>lsmod | grep mlx5_core</arg>
+<arg>pip3 --version</arg>
 <doc>Runs a command and returns stdout.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.711496" elapsed="0.046395"/>
+<status status="PASS" start="2026-05-05T14:06:58.219941" elapsed="1.042096"/>
+</kw>
+<kw name="Strip String" owner="String">
+<msg time="2026-05-05T14:06:59.262342" level="INFO">${clean} = pip 9.0.1 from /usr/lib/python3/dist-packages (python 3.6)</msg>
+<var>${clean}</var>
+<arg>${output}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<status status="PASS" start="2026-05-05T14:06:59.262205" elapsed="0.000150"/>
 </kw>
 <kw name="Should Contain" owner="BuiltIn">
-<msg time="2026-05-05T12:26:10.758279" level="FAIL">Mellanox driver is not installed on host 10.0.0.26. Output: : '' does not contain 'mlx5_core'</msg>
-<arg>${output}</arg>
-<arg>mlx5_core</arg>
-<arg>Mellanox driver is not installed on host ${host}. Output: ${output}</arg>
+<arg>${clean}</arg>
+<arg>pip ${expected_version}</arg>
+<arg>Expected pip ${expected_version}, but got: ${clean}</arg>
 <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="FAIL" start="2026-05-05T12:26:10.757966" elapsed="0.000399">Mellanox driver is not installed on host 10.0.0.26. Output: : '' does not contain 'mlx5_core'</status>
+<status status="PASS" start="2026-05-05T14:06:59.262406" elapsed="0.000331"/>
 </kw>
-<arg>${host}</arg>
-<doc>Checks if Mellanox driver is installed on the host.</doc>
-<status status="FAIL" start="2026-05-05T12:26:10.711332" elapsed="0.047100">Mellanox driver is not installed on host 10.0.0.26. Output: : '' does not contain 'mlx5_core'</status>
+<arg>${pip_version}</arg>
+<doc>Checks if pip is installed and matches the expected version.</doc>
+<status status="PASS" start="2026-05-05T14:06:58.219787" elapsed="1.042993"/>
 </kw>
-<doc>Checks if Mellanox driver is installed on the host.</doc>
-<status status="FAIL" start="2026-05-05T12:26:10.711137" elapsed="0.047393">Mellanox driver is not installed on host 10.0.0.26. Output: : '' does not contain 'mlx5_core'</status>
+<doc>Checks if pip is installed on the host.</doc>
+<status status="PASS" start="2026-05-05T14:06:58.219602" elapsed="1.043274"/>
 </test>
-<test id="s1-s3-t3" name="Check DOCA-OFED Installation" line="23">
-<kw name="Check DOCA-OFED Installation" owner="common">
-<kw name="Run Command" owner="ssh">
-<kw name="Execute Command" owner="SSHLibrary">
-<msg time="2026-05-05T12:26:10.759203" level="INFO">Executing command 'dpkg -l | grep doca-ofed'.</msg>
-<msg time="2026-05-05T12:26:10.819882" level="INFO">Command exited with return code 1.</msg>
-<msg time="2026-05-05T12:26:10.819948" level="INFO">${output} = </msg>
-<var>${output}</var>
-<arg>${cmd}</arg>
-<doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.759135" elapsed="0.060830"/>
-</kw>
-<return>
-<value>${output}</value>
-<status status="PASS" start="2026-05-05T12:26:10.819997" elapsed="0.000021"/>
-</return>
-<msg time="2026-05-05T12:26:10.820153" level="INFO">${output} = </msg>
-<var>${output}</var>
-<arg>dpkg -l | grep doca-ofed</arg>
-<doc>Runs a command and returns stdout.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.758984" elapsed="0.061189"/>
-</kw>
-<kw name="Should Contain" owner="BuiltIn">
-<msg time="2026-05-05T12:26:10.820536" level="FAIL">DOCA-OFED is not installed on host 10.0.0.26. Output: : '' does not contain 'doca-ofed'</msg>
-<arg>${output}</arg>
-<arg>doca-ofed</arg>
-<arg>DOCA-OFED is not installed on host ${host}. Output: ${output}</arg>
-<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="FAIL" start="2026-05-05T12:26:10.820253" elapsed="0.000334">DOCA-OFED is not installed on host 10.0.0.26. Output: : '' does not contain 'doca-ofed'</status>
-</kw>
-<arg>${host}</arg>
-<doc>Verifies if DOCA-OFED is installed on the host.</doc>
-<status status="FAIL" start="2026-05-05T12:26:10.758827" elapsed="0.061832">DOCA-OFED is not installed on host 10.0.0.26. Output: : '' does not contain 'doca-ofed'</status>
-</kw>
-<doc>Verifies if DOCA-OFED is installed on the host.</doc>
-<status status="FAIL" start="2026-05-05T12:26:10.758634" elapsed="0.062144">DOCA-OFED is not installed on host 10.0.0.26. Output: : '' does not contain 'doca-ofed'</status>
-</test>
-<test id="s1-s3-t4" name="Check host network port names &amp; bus addresses" line="27">
-<kw name="Check host network port names &amp; bus addresses" owner="common">
-<kw name="Run Command" owner="ssh">
-<kw name="Execute Command" owner="SSHLibrary">
-<msg time="2026-05-05T12:26:10.821599" level="INFO">Executing command 'lspci -nn | grep Ethernet'.</msg>
-<msg time="2026-05-05T12:26:10.894038" level="INFO">Command exited with return code 0.</msg>
-<msg time="2026-05-05T12:26:10.894146" level="INFO">${output} = 03:00.0 Ethernet controller [0200]: Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection [8086:10fb] (rev 01)
-03:00.1 Ethernet controller [0200]: Intel Corporation 82599ES 10-Gigabit SFI/S...</msg>
-<var>${output}</var>
-<arg>${cmd}</arg>
-<doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.821537" elapsed="0.072631"/>
-</kw>
-<return>
-<value>${output}</value>
-<status status="PASS" start="2026-05-05T12:26:10.894204" elapsed="0.000023"/>
-</return>
-<msg time="2026-05-05T12:26:10.894318" level="INFO">${pci_output} = 03:00.0 Ethernet controller [0200]: Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection [8086:10fb] (rev 01)
-03:00.1 Ethernet controller [0200]: Intel Corporation 82599ES 10-Gigabit SFI/S...</msg>
-<var>${pci_output}</var>
-<arg>lspci -nn | grep Ethernet</arg>
-<doc>Runs a command and returns stdout.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.821412" elapsed="0.072974"/>
-</kw>
+<test id="s1-t3" name="Check Required PIP Packages" line="23">
+<kw name="PIP Packages check" owner="common">
 <for flavor="IN">
 <iter>
-<kw name="Should Contain" owner="BuiltIn">
-<arg>${pci_output}</arg>
-<arg>${pci}</arg>
-<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.894625" elapsed="0.000228"/>
+<kw name="PIP Package check" owner="common">
+<kw name="Run Command" owner="ssh">
+<kw name="Execute Command" owner="SSHLibrary">
+<msg time="2026-05-05T14:06:59.263891" level="INFO">Executing command 'pip3 show distro'.</msg>
+<msg time="2026-05-05T14:07:00.333405" level="INFO">Command exited with return code 0.</msg>
+<msg time="2026-05-05T14:07:00.333549" level="INFO">${output} = Name: distro
+Version: 1.9.0
+Summary: Distro - an OS platform information API
+Home-page: https://github.com/python-distro/distro
+Author: Nir Cohen
+Author-email: nir36g@gmail.com
+License: Apache License...</msg>
+<var>${output}</var>
+<arg>${cmd}</arg>
+<doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
+<status status="PASS" start="2026-05-05T14:06:59.263831" elapsed="1.069739"/>
 </kw>
-<var name="${pci}">03:00.0</var>
-<status status="PASS" start="2026-05-05T12:26:10.894559" elapsed="0.000322"/>
+<return>
+<value>${output}</value>
+<status status="PASS" start="2026-05-05T14:07:00.333627" elapsed="0.000037"/>
+</return>
+<msg time="2026-05-05T14:07:00.333773" level="INFO">${output} = Name: distro
+Version: 1.9.0
+Summary: Distro - an OS platform information API
+Home-page: https://github.com/python-distro/distro
+Author: Nir Cohen
+Author-email: nir36g@gmail.com
+License: Apache License...</msg>
+<var>${output}</var>
+<arg>pip3 show ${package}</arg>
+<doc>Runs a command and returns stdout.</doc>
+<status status="PASS" start="2026-05-05T14:06:59.263703" elapsed="1.070088"/>
+</kw>
+<kw name="Strip String" owner="String">
+<msg time="2026-05-05T14:07:00.334111" level="INFO">${clean} = Name: distro
+Version: 1.9.0
+Summary: Distro - an OS platform information API
+Home-page: https://github.com/python-distro/distro
+Author: Nir Cohen
+Author-email: nir36g@gmail.com
+License: Apache License...</msg>
+<var>${clean}</var>
+<arg>${output}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<status status="PASS" start="2026-05-05T14:07:00.333898" elapsed="0.000235"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${clean}</arg>
+<arg>Name: ${package}</arg>
+<arg>Pip package ${package} is not installed. Output: ${clean}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2026-05-05T14:07:00.334207" elapsed="0.000255"/>
+</kw>
+<arg>${pkg}</arg>
+<doc>Verifies that a specific pip package is installed on the host.</doc>
+<status status="PASS" start="2026-05-05T14:06:59.263556" elapsed="1.070938"/>
+</kw>
+<var name="${pkg}">distro</var>
+<status status="PASS" start="2026-05-05T14:06:59.263492" elapsed="1.071017"/>
 </iter>
 <iter>
+<kw name="PIP Package check" owner="common">
+<kw name="Run Command" owner="ssh">
+<kw name="Execute Command" owner="SSHLibrary">
+<msg time="2026-05-05T14:07:00.335025" level="INFO">Executing command 'pip3 show scapy'.</msg>
+<msg time="2026-05-05T14:07:01.422011" level="INFO">Command exited with return code 0.</msg>
+<msg time="2026-05-05T14:07:01.422185" level="INFO">${output} = Name: scapy
+Version: 2.5.0
+Summary: Scapy: interactive packet manipulation tool
+Home-page: https://scapy.net
+Author: Philippe BIONDI
+Author-email: guillaume@valadon.net
+License: GPL-2.0-only
+Location:...</msg>
+<var>${output}</var>
+<arg>${cmd}</arg>
+<doc>Executes ``command`` on the remote machine and returns its outputs.</doc>
+<status status="PASS" start="2026-05-05T14:07:00.334966" elapsed="1.087241"/>
+</kw>
+<return>
+<value>${output}</value>
+<status status="PASS" start="2026-05-05T14:07:01.422262" elapsed="0.000037"/>
+</return>
+<msg time="2026-05-05T14:07:01.422396" level="INFO">${output} = Name: scapy
+Version: 2.5.0
+Summary: Scapy: interactive packet manipulation tool
+Home-page: https://scapy.net
+Author: Philippe BIONDI
+Author-email: guillaume@valadon.net
+License: GPL-2.0-only
+Location:...</msg>
+<var>${output}</var>
+<arg>pip3 show ${package}</arg>
+<doc>Runs a command and returns stdout.</doc>
+<status status="PASS" start="2026-05-05T14:07:00.334832" elapsed="1.087580"/>
+</kw>
+<kw name="Strip String" owner="String">
+<msg time="2026-05-05T14:07:01.422658" level="INFO">${clean} = Name: scapy
+Version: 2.5.0
+Summary: Scapy: interactive packet manipulation tool
+Home-page: https://scapy.net
+Author: Philippe BIONDI
+Author-email: guillaume@valadon.net
+License: GPL-2.0-only
+Location:...</msg>
+<var>${clean}</var>
+<arg>${output}</arg>
+<doc>Remove leading and/or trailing whitespaces from the given string.</doc>
+<status status="PASS" start="2026-05-05T14:07:01.422508" elapsed="0.000166"/>
+</kw>
 <kw name="Should Contain" owner="BuiltIn">
-<arg>${pci_output}</arg>
-<arg>${pci}</arg>
+<arg>${clean}</arg>
+<arg>Name: ${package}</arg>
+<arg>Pip package ${package} is not installed. Output: ${clean}</arg>
 <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.895008" elapsed="0.000216"/>
+<status status="PASS" start="2026-05-05T14:07:01.422736" elapsed="0.000278"/>
 </kw>
-<var name="${pci}">03:00.1</var>
-<status status="PASS" start="2026-05-05T12:26:10.894951" elapsed="0.000293"/>
+<arg>${pkg}</arg>
+<doc>Verifies that a specific pip package is installed on the host.</doc>
+<status status="PASS" start="2026-05-05T14:07:00.334658" elapsed="1.088409"/>
+</kw>
+<var name="${pkg}">scapy</var>
+<status status="PASS" start="2026-05-05T14:07:00.334575" elapsed="1.088529"/>
 </iter>
-<var>${pci}</var>
-<value>@{pci_nics}</value>
-<status status="PASS" start="2026-05-05T12:26:10.894437" elapsed="0.000824"/>
+<var>${pkg}</var>
+<value>@{packages}</value>
+<status status="PASS" start="2026-05-05T14:06:59.263411" elapsed="2.159723"/>
 </for>
-<arg>@{pci_nics}</arg>
-<doc>Verifies that the network ports have the expected names and bus addresses.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.821247" elapsed="0.074041"/>
+<arg>@{pip_packages}</arg>
+<doc>Loops through a list of pip packages and verifies each is installed.</doc>
+<status status="PASS" start="2026-05-05T14:06:59.263266" elapsed="2.159910"/>
 </kw>
-<doc>Verifies that the network ports have the expected names and bus addresses.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.820940" elapsed="0.074415"/>
+<doc>Verifies that required pip packages are installed on the host.</doc>
+<status status="PASS" start="2026-05-05T14:06:59.262993" elapsed="2.160272"/>
 </test>
 <kw name="Close SSH Connection" owner="ssh" type="TEARDOWN">
 <kw name="Close All Connections" owner="SSHLibrary">
 <doc>Closes all open connections.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.895643" elapsed="0.000113"/>
+<status status="PASS" start="2026-05-05T14:07:01.423819" elapsed="0.000133"/>
 </kw>
 <doc>Closes the SSH session.</doc>
-<status status="PASS" start="2026-05-05T12:26:10.895559" elapsed="0.000225"/>
+<status status="PASS" start="2026-05-05T14:07:01.423576" elapsed="0.000406"/>
 </kw>
-<status status="FAIL" start="2026-05-05T12:26:09.085054" elapsed="1.810744"/>
-</suite>
-<status status="FAIL" start="2026-05-05T12:26:06.396260" elapsed="4.499795"/>
+<status status="PASS" start="2026-05-05T14:06:56.494641" elapsed="4.929357"/>
 </suite>
 <statistics>
 <total>
-<stat pass="4" fail="2" skip="0">All Tests</stat>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="Tests" id="s1" pass="4" fail="2" skip="0">Tests</stat>
-<stat name="00 Host Connectivity" id="s1-s1" pass="1" fail="0" skip="0">Tests.00 Host Connectivity</stat>
-<stat name="10 SSH" id="s1-s2" pass="1" fail="0" skip="0">Tests.10 SSH</stat>
-<stat name="Host Config" id="s1-s3" pass="2" fail="2" skip="0">Tests.Host Config</stat>
+<stat name="Runtime Dependency Checks" id="s1" pass="3" fail="0" skip="0">Runtime Dependency Checks</stat>
 </suite>
 </statistics>
 <errors>

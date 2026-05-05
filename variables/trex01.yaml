@@ -14,6 +14,17 @@ expected_interfaces:
 # Hugepages configuration
 Hugepages:  2048
 
+# Expected Python version for runtime dependency check
+python_version: 6.9
+
+# Expected pip version for runtime dependency check
+pip_version:   9.0.1
+
+# Required pip packages for TRex
+pip_packages:
+  - distro
+  - scapy
+
 # TRex installation paths
 trex_dir: /opt/trex
 trex_cfg: /etc/trex_cfg.yaml
