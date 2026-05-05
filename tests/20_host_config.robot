@@ -31,4 +31,3 @@ Check host network port names & bus addresses
 Setup SSH Session
     Load Credentials
     Open SSH Connection    ${host}
-    Clear Console
