@@ -14,7 +14,6 @@ Verify host is reachable
     ${platform}=    Evaluate    platform.system()   modules=platform
     ${count_flag}=     Set Variable If    
     ...    "${platform}"=="Windows"    -n    -c
-
     ${result}=    Run Process    ping    ${count_flag} 2    ${Address}    shell=False    stdout=PIPE    stderr=PIPE
     Should Be Equal As Integers    ${result.rc}    0    Host ${Address} is not reachable. Ping output:\n ${result.stdout}\n 
     #...    ${result.stderr}

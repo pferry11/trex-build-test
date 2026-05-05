@@ -1,7 +1,0 @@
-PING 10.0.0.26 (10.0.0.26) 56(84) bytes of data.
-64 bytes from 10.0.0.26: icmp_seq=1 ttl=64 time=0.483 ms
-64 bytes from 10.0.0.26: icmp_seq=2 ttl=64 time=0.967 ms
-
---- 10.0.0.26 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1026ms
-rtt min/avg/max/mdev = 0.483/0.725/0.967/0.242 ms
