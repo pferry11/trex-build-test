@@ -1,6 +1,6 @@
 *** Settings ***
 Resource    ../resources/ssh.resource
-Variables   ../variables/trex01.yaml
+#Variables   ../variables/trex01.yaml
 
 *** Test Cases ***
 Validate SSH Credentials

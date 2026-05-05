@@ -1,7 +1,7 @@
 *** Settings ***
 Resource          ../resources/ssh.resource
 Resource          ../resources/common.resource
-Variables         ../variables/trex01.yaml
+#Variables         ../variables/trex01.yaml
 
 Suite Setup       Setup SSH Session
 Suite Teardown    Close SSH Connection

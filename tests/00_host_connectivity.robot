@@ -1,6 +1,6 @@
 *** Settings ***
 Resource          ../resources/common.resource
-Variables         ../variables/trex01.yaml
+#Variables         ../variables/trex01.yaml
 
 ***Variables ***
 
