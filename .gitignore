@@ -8,6 +8,9 @@ report.html
 *.png
 *.jpg
 
+# Ignore logs directory
+logs/
+
 # Python cache
 __pycache__/
 *.pyc
