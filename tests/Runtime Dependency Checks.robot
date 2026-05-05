@@ -7,7 +7,7 @@ Suite Setup       Setup SSH Session
 Suite Teardown    Close SSH Connection
 
 ***Variables ***
-#${Hugepages}    4096
+${Hugepages}    2048
 
 *** Test Cases ***
 
@@ -27,7 +27,7 @@ Check DOCA-OFED Installation
 Check host network port names & bus addresses
     [Documentation]    Verifies that the network ports have the expected names and bus addresses.
     Check host network port names & bus addresses    @{pci_nics}    
-
+    
 *** Keywords ***
 Setup SSH Session
     Load Credentials

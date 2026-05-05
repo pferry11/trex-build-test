@@ -11,24 +11,28 @@ Library    OperatingSystem
 Verify host is reachable
     [Arguments]    ${Address}
     [Documentation]    Pings the host to ensure it's reachable.
-    ${result}=    Run Process    ping    -c 1    ${Address}    stdout=PIPE    stderr=PIPE
-    #Log To Console    \n\n\ \ \ \ Host ${Address} is reachable.\n
-    Should Be Equal As Integers    ${result.rc}    0    Host ${Address} is not reachable. Ping output: ${result.stdout}
+    ${platform}=    Evaluate    platform.system()   modules=platform
+    ${count_flag}=     Set Variable If    
+    ...    "${platform}"=="Windows"    -n    -c
+
+    ${result}=    Run Process    ping    ${count_flag} 2    ${Address}    shell=False    stdout=PIPE    stderr=PIPE
+    Should Be Equal As Integers    ${result.rc}    0    Host ${Address} is not reachable. Ping output:\n ${result.stdout}\n 
+    #...    ${result.stderr}
 
 #Host Configuration Tests
 Validation of Mellanox Driver
     [Arguments]    ${host}
     [Documentation]    Checks if Mellanox driver is installed on the host.
-    ${cmd}=    Set Variable    ssh ${host} "lsmod | grep mlx5_core"
-    ${result}=    Run Process    ${cmd}    stdout=PIPE    stderr=PIPE
-    Should Contain    ${result.stdout}    mlx5_core    Mellanox driver is not installed on host ${host}. Command output: ${result.stdout}
+    ${output}=    Run Command    lsmod | grep mlx5_core
+    Should Contain    ${output}    mlx5_core
+    ...    Mellanox driver is not installed on host ${host}. Output: ${output}
 
 Check DOCA-OFED Installation
     [Arguments]    ${host}
     [Documentation]    Verifies if DOCA-OFED is installed on the host.
-    ${cmd}=    Set Variable    ssh ${host} "dpkg -l | grep doca-ofed"
-    ${result}=    Run Process    ${cmd}    stdout=PIPE    stderr=PIPE
-    Should Contain    ${result.stdout}    doca-ofed    DOCA-OFED is not installed on host ${host}. Command output: ${result.stdout}
+    ${output}=    Run Command    dpkg -l | grep doca-ofed
+    Should Contain    ${output}    doca-ofed
+    ...    DOCA-OFED is not installed on host ${host}. Output: ${output}
 
 Verify Hugepages
     [Arguments]    ${expected}
@@ -41,19 +45,13 @@ Verify Hugepages
     Should Be Equal As Integers    ${actual}    ${expected}
     ...    Expected ${expected}, got ${actual}
     
-Check host netowk port names & bus addresses
-    [Arguments]    ${host}
+Check host network port names & bus addresses
+    [Arguments]    @{pci_nics}
     [Documentation]    Verifies that the network ports have the expected names and bus addresses.
-    ${cmd}=    Set Variable    ssh ${host} "lspci -nn | grep Ethernet"
-    ${result}=    Run Process    ${cmd}    stdout=PIPE    stderr=PIPE
-    Should Contain    ${result.stdout}    Ethernet controller: Mellanox Technologies MT27700 Family [ConnectX-6] (rev 01)    Network port names or bus addresses do not match expected values on host ${host}. Command output: ${result.stdout}
-
-Check for connected network ports
-    [Arguments]    ${host}
-    [Documentation]    Ensures that the expected number of network ports are connected on the host.
-    ${cmd}=    Set Variable    ssh ${host} "ls /sys/class/net | grep -E 'enp[0-9]+s[0-9]+f[0-9]+' | wc -l"
-    ${result}=    Run Process    ${cmd}    stdout=PIPE    stderr=PIPE
-    Should Be Equal As Integers    ${result.stdout.strip()}    4    Expected 4 connected network ports on host ${host}, but found ${result.stdout.strip()}. Command output: ${result.stdout}
+    ${pci_output}=    Run Command    lspci -nn | grep Ethernet
+    FOR    ${pci}    IN    @{pci_nics}
+        Should Contain    ${pci_output}    ${pci}
+    END
 
 #Runtime Dependency Tests
 

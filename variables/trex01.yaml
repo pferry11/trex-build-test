@@ -1,4 +1,19 @@
+# Host connection details
 host: 10.0.0.26
 name: trex01
+
+# PCI devices expected on this host (from lspci)
+pci_nics:
+  - "03:00.0"   # Intel 82599ES Port 0
+  - "03:00.1"   # Intel 82599ES Port 1
+
+# OS-visible network interfaces (from /sys/class/net)
+expected_interfaces:
+  - "ens224"    # VMXNET3 interface
+
+# Hugepages configuration
+Hugepages:  2048
+
+# TRex installation paths
 trex_dir: /opt/trex
 trex_cfg: /etc/trex_cfg.yaml
